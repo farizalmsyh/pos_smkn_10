@@ -93,6 +93,7 @@ Route::prefix('report')->group(function(){
         Route::post('s', 'Core\Report\ReportBahanController@save')->name('report-bahan-save');
         Route::get('d/{id}', 'Core\Report\ReportBahanController@delete')->name('report-bahan-delete');
         Route::get('print-all', 'Core\Report\ReportBahanController@printAll')->name('report-bahan-print-all');
+        Route::get('print-today', 'Core\Report\ReportBahanController@printToday')->name('report-bahan-print-today');
         Route::post('print-date', 'Core\Report\ReportBahanController@printDate')->name('report-bahan-print-date');
     });
 });

@@ -10,6 +10,7 @@
                             <button class="dropdown-item" disabled>Pilh Data Print</button>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('report-bahan-print-all')}}">Semua Data</a>
+                            <a class="dropdown-item" href="{{route('report-bahan-print-today')}}">Hari Ini</a>
                             <button class="dropdown-item" data-toggle="modal" data-target="#modalRangeDate">Date Range</button>
                         </div>
                     </div>

@@ -49,6 +49,13 @@ class ReportBahanController extends Controller
         return $pdf->download('Laporan Bahan Keseluruhan ('.Carbon::now()->locale('id')->isoFormat('Do MMMM YYYY').').pdf');
     }
 
+    public function printToday()
+    {
+        $reportbahan = ReportBahan::where('created_at', Carbon::today())->get();
+        $pdf = PDF::loadView('report.report-bahan.print-today', compact('reportbahan'));
+        return $pdf->download('Laporan Bahan Hari Ini ('.Carbon::now()->locale('id')->isoFormat('Do MMMM YYYY').').pdf');
+    }
+
     public function printDate(Request $request)
     {
         if($request->date_from && $request->date_to){
