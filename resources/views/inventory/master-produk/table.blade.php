@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header bg-info text-white">
                 <div class="card-title">
-                    <a href="" class="btn btn-success float-right text-white py-2" ><i class="fas fa-plus"></i></a>
+                    <a href="{{route('master-produk-create')}}" class="btn btn-success float-right text-white py-2" ><i class="fas fa-plus"></i></a>
                     <h5 class="pt-2"><i class="fas fa-users"></i>&nbsp;Daftar Produk</h5>
                 </div>
             </div>
@@ -13,10 +13,8 @@
                         <thead class="text-center">
                             <tr>
                                 <th>No</th>
-                                <th>Kode Produk</th>
                                 <th>Barcode</th>
                                 <th>Nama Produk</th>
-                                <th>Classification</th>
                                 <th>Stok</th>
                                 <th>Curr</th>
                                 <th>Harga Beli</th>
@@ -29,16 +27,18 @@
                              @foreach($produk as $key => $value)
                              <tr>
                                  <td>{{$key+1}}</td>
-                                 <td>{{$value->id}}</td>
                                  <td>{{$value->barcode}}</td>
                                  <td>{{$value->nama}}</td>
-                                 <td></td>
                                  <td>{{$value->stok}}</td>
-                                 <td>{{$value->curr}}</td>
+                                 <td>{{\App\Model\MasterCurr::where('_id', $value->curr)->value('curr')}}</td>
                                  <td>{{$value->harga_beli}}</td>
                                  <td>{{$value->harga_jual}}</td>
-                                 <td>{{$value->unit}}</td>
-                                 <td><a href="#" class="btn-sm btn-warning"><i class="fas fa-edit"></i></a></td>
+                                 <td>{{\App\Model\MasterUnit::where('_id', $value->unit)->value('unit')}}</td>
+                                 <td>
+                                    <a href="{{route('master-produk-add-stok', [$value->id])}}" class="btn-sm btn-success"><i class="fas fa-plus"></i></a>
+                                    <a href="{{route('master-produk-edit', [$value->id])}}" class="btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a href="{{route('master-produk-delete', [$value->id])}}" class="btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
                              </tr>
                              @endforeach
                         </tbody>

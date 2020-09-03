@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->integer('id_koperasi');
             $table->string('name');
+            $table->date('birth_date');
+            $table->string('gender');
             $table->bigInteger('kontak');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

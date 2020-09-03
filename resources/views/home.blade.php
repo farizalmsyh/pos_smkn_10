@@ -21,20 +21,28 @@
                                     <td>{{Auth::user()->name}}</td>
                                 </tr>
                                 <tr>
+                                    <td>Jenis Kelamin :</td>
+                                    <td>@if(Auth::user()->gender == 'male') Laki-Laki @elseif(Auth::user()->gender == 'female') Perempuan @else - @endif</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Lahir :</td>
+                                    <td>@if(Auth::user()->birth_date != null || ''){{\Carbon\Carbon::parse(Auth::user()->birth_date)->locale('id')->isoFormat('Do MMMM YYYY')}}@else - @endif</td>
+                                </tr>
+                                <tr>
                                     <td>Alamat</td>
                                     <td>{{Auth::user()->alamat}}</td>
                                 </tr>
                                 <tr>
                                     <td>Kontak</td>
-                                    <td>0{{Auth::user()->kontak}}</td>
+                                    <td>{{Auth::user()->kontak}}</td>
                                 </tr>
                                 <tr>
                                     <td>Koperasi</td>
-                                    <td>{{Auth::user()->id_koperasi == 1 ? 'Admin' : 'User'}}</td>
+                                    <td>{{\App\Model\Profil::where('_id', Auth::user()->id_koperasi)->value('nama_koperasi')}}</td>
                                 </tr>
                                 <tr>
                                     <td>Role</td>
-                                    <td>{{Auth::user()->hak_akses == 1 ? 'Super Admin' : 'User'}}</td>
+                                    <td class="text-capitalize">{{Auth::user()->hak_akses}}</td>
                                 </tr>
                             </table>
                         </div>

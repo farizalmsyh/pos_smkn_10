@@ -23,13 +23,13 @@
                         </thead>
                         <tbody>
                             @foreach($user as $key => $value)
-                            <tr>
+                            <tr @if($value->id == Auth::user()->id) class="text-primary" @endif>
                                 <td class="text-center">{{$key+1}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->email}}</td>
                                 <td>{{$value->kontak}}</td>
                                 <td>{{\App\Model\Profil::where('_id', $value->id_koperasi)->value('nama_koperasi')}}</td>
-                                <td>{{$value->hak_akses}}</td>
+                                <td class="text-capitalize">{{$value->hak_akses}}</td>
                                 <td class="text-center text-white">
                                     @if($value->id != Auth::user()->id)
                                     <a href="{{route('delete-user', [$value->id])}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>

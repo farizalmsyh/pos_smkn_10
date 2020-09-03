@@ -30,7 +30,7 @@
     				<div class="input-group">
   						<input name="persen" type="number" class="form-control" placeholder="Tambah Persentase Keuntungan" aria-label="Tambah Persentase Keuntungan" aria-describedby="button-addon2">
   						<div class="input-group-append">
-    						<button class="btn btn-success" type="button" id="button-addon2">Save</button>
+    						<button class="btn btn-success" type="submit" id="button-addon2">Save</button>
   						</div>
 					</div>
     			</form>

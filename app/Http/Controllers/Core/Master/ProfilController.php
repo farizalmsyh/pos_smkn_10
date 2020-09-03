@@ -64,11 +64,6 @@ class ProfilController extends Controller
 
     public function update(Request $request, $id)
     {
-        $cekFoto = Profil::where('_id', $id)->value('foto');
-        if ($cekFoto != 'default.png') {
-            $filename = public_path().'/img/other/profil/'.$cekFoto->foto;
-            File::delete($filename);
-        }
         $profil = Profil::find($id);
         $profil->nama_koperasi = $request->nama_koperasi;
         $profil->telepon = $request->telepon;
@@ -90,11 +85,6 @@ class ProfilController extends Controller
 
     public function delete($id)
     {
-    	$profil = Profil::where('_id',$id)->value('foto');
-    	if ($profil != 'default.png') {
-	        $filename = public_path().'/img/other/profil/'.$profil->foto;
-	        File::delete($filename);
-    	}
 	    Profil::where('_id', $id)->delete();
 		Alert::success('Informasi Toko', 'Berhasil Menghapus Data !');
 		return redirect()->route('profil');
