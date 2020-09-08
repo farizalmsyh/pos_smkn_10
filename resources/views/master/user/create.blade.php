@@ -53,11 +53,8 @@
                                 <label for="hak_akses">Hak Akses</label>
                                 <select class="form-control" name="hak_akses" >
                                     <option disabled selected>Pilh Hak Akses</option>
-                                    @if(Auth::user()->hak_akses == 'superadmin' || Auth::user()->hak_akses == 'admin')
                                     @if(Auth::user()->hak_akses == 'superadmin')
                                     <option value="superadmin">Superadmin</option>
-                                    @endif
-                                    <option value="admin">Admin Koperasi</option>
                                     <option value="kasir">Kasir</option>
                                     <option value="gudang">Admin Gudang</option>
                                     @endif

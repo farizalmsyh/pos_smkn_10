@@ -16,10 +16,11 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-      Interface
+      List Dashboard Feature
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
+    @if(Auth::user()->hak_akses == 'superadmin')
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
@@ -33,8 +34,19 @@
         </div>
       </div>
     </li>
+    @endif
 
     <!-- Nav Item - Utilities Collapse Menu -->
+    @if(Auth::user()->hak_akses != 'gudang')
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{route('kasir-transaksi')}}" >
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Kasir</span>
+      </a>
+    </li>
+    @endif
+
+    @if(Auth::user()->hak_akses != 'kasir')
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
@@ -64,7 +76,7 @@
         </div>
       </div>
     </li>
-
+    @endif
     <!-- Divider -->
     <hr class="sidebar-divider">
 

@@ -97,3 +97,12 @@ Route::prefix('report')->group(function(){
         Route::post('print-date', 'Core\Report\ReportBahanController@printDate')->name('report-bahan-print-date');
     });
 });
+
+Route::prefix('cashier')->group(function(){
+    Route::prefix('transaksi')->group(function(){
+        Route::get('/', 'Core\Cashier\TransaksiController@index')->name('kasir-transaksi');
+        Route::post('s', 'Core\Cashier\TransaksiController@transaksiSementaraSave')->name('transaksi-sementara-save');
+        Route::post('s-d', 'Core\Cashier\TransaksiController@transaksiDetailSave')->name('transaksi-detail-save');
+        Route::get('delete/{id}', 'Core\Cashier\TransaksiController@transaksiSementaraDelete')->name('transaksi-sementara-delete');
+    });
+});
