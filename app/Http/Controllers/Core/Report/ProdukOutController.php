@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Core\Report;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\ProdukOut;
+use App\Model\Produk;
+use App\Model\Profil;
+use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use PDF;
+use Auth;
 
 class ProdukOutController extends Controller
 {
@@ -14,6 +18,36 @@ class ProdukOutController extends Controller
     {
         $produkout = ProdukOut::all();
         return view('report.produk-out.index', compact('produkout'));
+    }
+
+    public function create()
+    {
+        return view('report.produk-out.create');
+    }
+
+    public function save(Request $request)
+    {
+        $produk = Produk::where('_id', $request->id_produk)->first();
+        $produkout = new ProdukOut;
+        $produkout->nama = $produk->nama;
+        $produkout->barcode = $produk->barcode;
+        $produkout->id_koperasi = Profil::where('_id', Auth::user()->id_koperasi)->value('nama_koperasi');
+        $produkout->kasir = Auth::user()->name;
+        $produkout->tanggal = strtotime($request->tanggal);
+        $produkout->jumlah = $request->jumlah;
+        $produkout->sub_harga = intval($request->jumlah) * floatval($produk->harga_beli);
+        $produkout->type_keluar = $request->type_keluar;
+        $produkout->save();
+        
+        Alert::success('Data Laporan Produk Keluar', 'Berhasil Menambah Laporan Produk Keluar !');
+        return redirect()->route('produk-out');
+    }
+
+    public function delete($id)
+    {
+        ProdukOut::where('_id', $id)->delete();
+        Alert::success('Data Laporan Produk Keluar', 'Berhasil Menghapus Laporan Produk Keluar !');
+        return redirect()->route('produk-out');
     }
 
     public function printAll()

@@ -28,7 +28,11 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        return view('welcome');
+        $karyawan = \App\User::count();
+        $produk = \App\Model\Produk::count();
+        $transaksi = \App\Model\TransaksiDetail::count();
+        $profil = \App\Model\Profil::count();
+        return view('welcome', compact('karyawan', 'produk', 'transaksi', 'profil'));
     }
 
     public function setting()

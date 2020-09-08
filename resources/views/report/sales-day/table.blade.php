@@ -5,15 +5,15 @@
                 <div class="card-title">
                     <div class="btn-group dropleft float-right">
                         <button class="btn btn-primary text-white py-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-print"></i>&nbsp; Print PDF</button>
-                        <a href="{{route('produk-out-create')}}" class="btn btn-success ml-3"><i class="fas fa-plus"></i></a>
                         <div class="dropdown-menu">
                             <button class="dropdown-item" disabled>Pilh Data Print</button>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{route('produk-out-print-all')}}">Semua Data</a>
+                            <a class="dropdown-item" href="{{route('sales-day-print-all')}}">Semua Data</a>
+                            <a class="dropdown-item" href="{{route('sales-day-print-today')}}">Hari Ini</a>
                             <button class="dropdown-item" data-toggle="modal" data-target="#modalRangeDate">Date Range</button>
                         </div>
                     </div>
-                    <h5 class="pt-2"><i class="fas fa-file-export"></i>&nbsp;Laporan Barang Keluar</h5>
+                    <h5 class="pt-2"><i class="fas fa-archive"></i>&nbsp;Data Bahan</h5>
                 </div>
             </div>
             <div class="card-body">
@@ -22,24 +22,22 @@
                         <thead class="text-center">
                             <tr>
                                 <th>No</th>
-                                <th>Barcode</th>
-                                <th>Nama</th>
-                                <th>Jumlah</th>
+                                <th>Kasir</th>
                                 <th>Tanggal</th>
-                                <th>Via</th>
+                                <th>Total Harga</th>
+                                <th>Nominal Pembayaran</th>
                                 <th>Option</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            @foreach($produkout as $key => $value)
+                            @foreach($transaksi as $key => $value)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$value->barcode}}</td>
-                                <td>{{$value->nama}}</td>
-                                <td>{{$value->jumlah}}</td>
-                                <td>{{$value->tanggal}}</td>
-                                <td>{{$value->type_keluar}}</td>
-                                <td><a href="{{route('produk-out-delete', [$value->id])}}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+                                <td>{{\App\User::where('_id', $value->kasir)->value('name')}}</td>
+                                <td>{{Carbon\Carbon::parse($value->tanggal)->locale('id')->isoFormat('dddd, DD MMMM YYYY')}}</td>
+                                <td>Rp. {{$value->subharga}}</td>
+                                <td>Rp. {{$value->nominal_pembayaran}}</td>
+                                <td><a href="{{route('sales-day-detail', [$value->id])}}" class="btn btn-sm btn-info"><i class="fas fa-file"></i> </a></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -62,7 +60,7 @@
 		<div class="modal-body">
 			<div class="row justify-content-center">
 				<div class="col-md-10">
-					<form class="row" id="delete-account-form" action="{{ route('produk-out-print-date') }}" method="POST">
+					<form class="row" id="delete-account-form" action="{{ route('sales-day-print-date') }}" method="POST">
 					{{ csrf_field() }}
 						<div class="form-group col-md-6">
                             <label for="date_from">Dari</label>

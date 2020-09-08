@@ -5,6 +5,7 @@
                 <div class="card-title">
                     <div class="btn-group dropleft float-right">
                         <button class="btn btn-primary text-white py-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-print"></i>&nbsp; Print PDF</button>
+                        <a href="{{route('produk-in-create')}}" class="btn btn-success ml-3"><i class="fas fa-plus"></i></a>
                         <div class="dropdown-menu">
                             <button class="dropdown-item" disabled>Pilh Data Print</button>
                             <div class="dropdown-divider"></div>
@@ -26,9 +27,10 @@
                                 <th>Jumlah</th>
                                 <th>Tanggal</th>
                                 <th>Via</th>
+                                <th>Option</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             @foreach($produkin as $key => $value)
                             <tr>
                                 <td>{{$key+1}}</td>
@@ -37,6 +39,7 @@
                                 <td>{{$value->jumlah}}</td>
                                 <td>{{$value->tanggal}}</td>
                                 <td>{{$value->type_masuk}}</td>
+                                <td><a href="{{route('produk-in-delete', [$value->id])}}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
                             </tr>
                             @endforeach
                         </tbody>

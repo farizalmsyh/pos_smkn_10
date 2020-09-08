@@ -4,16 +4,16 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <form action="{{route('report-bahan-save')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('produk-in-save')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <div class="card">
-                        <div class="card-header bg-success text-white">Tambah Laporan Bahan</div>
+                        <div class="card-header bg-success text-white">Tambah Laporan Barang Masuk</div>
                         <div class="card-body row">        
                             <div class="form-group col-md-12">
-                                <label for="nama_bahan">Nama Bahan</label>
-                                <select class="js-example-responsive js-states form-control" style="width: 100%" name="nama_bahan" required>
-                                    @foreach(App\Model\MasterBahan::all() as $value)
-                                    <option value="{{$value->id}}">{{$value->nama_bahan}}</option>
+                                <label for="nama_bahan">Nama Produk</label>
+                                <select class="js-example-responsive js-states form-control" style="width: 100%" name="id_produk" required>
+                                    @foreach(App\Model\Produk::all() as $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -22,13 +22,17 @@
                                 <input type="number" name="jumlah" class="form-control" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="satuan">Satuan</label>
-                                <input type="text" name="satuan" class="form-control" required>
+                                <label for="satuan">Tanggal</label>
+                                <input type="date" name="tanggal" class="form-control" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="type_masuk">Via</label>
+                                <input type="text" name="type_masuk" class="form-control" required>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="float-right">
-                                <a href="{{route('report-bahan')}}" class="btn btn-secondary" >Close</a>
+                                <a href="{{route('produk-in')}}" class="btn btn-secondary" >Close</a>
                                 <button type="submit" class="btn btn-success">Save</button>
                             </div>
                         </div>
@@ -44,7 +48,7 @@
 <script>
     $(document).ready(function() {
       $('.js-example-responsive').select2({
-        placeholder: "Pilih Bahan",
+        placeholder: "Pilih Produk",
         allowClear: true,
         width: 'resolve'
       });

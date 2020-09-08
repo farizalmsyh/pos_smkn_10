@@ -73,6 +73,7 @@
           <a class="collapse-item" href="{{route('produk-in')}}">Lap. Barang Masuk</a>
           <a class="collapse-item" href="{{route('produk-out')}}">Lap. Barang Keluar</a>
           <a class="collapse-item" href="{{route('report-bahan')}}">Bahan-Bahan</a>
+          <a class="collapse-item" href="{{route('sales-day')}}">X-Sales-Day</a>
         </div>
       </div>
     </li>

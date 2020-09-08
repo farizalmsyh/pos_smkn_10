@@ -79,11 +79,17 @@ Route::prefix('inventory')->group(function(){
 Route::prefix('report')->group(function(){
     Route::prefix('produk-in')->group(function(){
         Route::get('/', 'Core\Report\ProdukInController@index')->name('produk-in');
+        Route::get('c', 'Core\Report\ProdukInController@create')->name('produk-in-create');
+        Route::post('s', 'Core\Report\ProdukInController@save')->name('produk-in-save');
+        Route::get('d/{id}', 'Core\Report\ProdukInController@delete')->name('produk-in-delete');
         Route::get('print-all', 'Core\Report\ProdukInController@printAll')->name('produk-in-print-all');
         Route::post('print-date', 'Core\Report\ProdukInController@printDate')->name('produk-in-print-date');
     });
     Route::prefix('produk-out')->group(function(){
         Route::get('/', 'Core\Report\ProdukOutController@index')->name('produk-out');
+        Route::get('c', 'Core\Report\ProdukOutController@create')->name('produk-out-create');
+        Route::post('s', 'Core\Report\ProdukOutController@save')->name('produk-out-save');
+        Route::get('d/{id}', 'Core\Report\ProdukOutController@delete')->name('produk-out-delete');
         Route::get('print-all', 'Core\Report\ProdukOutController@printAll')->name('produk-out-print-all');
         Route::post('print-date', 'Core\Report\ProdukOutController@printDate')->name('produk-out-print-date');
     });
@@ -95,6 +101,13 @@ Route::prefix('report')->group(function(){
         Route::get('print-all', 'Core\Report\ReportBahanController@printAll')->name('report-bahan-print-all');
         Route::get('print-today', 'Core\Report\ReportBahanController@printToday')->name('report-bahan-print-today');
         Route::post('print-date', 'Core\Report\ReportBahanController@printDate')->name('report-bahan-print-date');
+    });
+    Route::prefix('x-sales-day')->group(function(){
+        Route::get('/', 'Core\Report\XSalesDayController@index')->name('sales-day');
+        Route::get('i/{id}', 'Core\Report\XSalesDayController@detail')->name('sales-day-detail');
+        Route::get('print-all', 'Core\Report\XSalesDayController@printAll')->name('sales-day-print-all');
+        Route::get('print-today', 'Core\Report\XSalesDayController@printToday')->name('sales-day-print-today');
+        Route::post('print-date', 'Core\Report\XSalesDayController@printDate')->name('sales-day-print-date');
     });
 });
 

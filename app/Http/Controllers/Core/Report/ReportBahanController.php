@@ -31,7 +31,7 @@ class ReportBahanController extends Controller
         $reportbahan->save();
         
 
-        Alert::success('Data Produk', 'Berhasil Laporan Bahan !');
+        Alert::success('Data Produk', 'Berhasil Menambah Laporan Bahan !');
         return redirect()->route('report-bahan');
     }
 

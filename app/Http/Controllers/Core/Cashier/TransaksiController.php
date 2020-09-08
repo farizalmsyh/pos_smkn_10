@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\TransaksiSementara;
 use App\Model\TransaksiDetail;
 use App\Model\Produk;
+use App\Model\ProdukOut;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
@@ -49,11 +50,10 @@ class TransaksiController extends Controller
     public function transaksiDetailSave(Request $request)
     {
         $transaksi_sementara = TransaksiSementara::all();
-        $transaksi = new TransaksiDetail;
         $total = TransaksiSementara::sum('subtotal');
         if($total <= floatval($request->nominal_pembayaran)){
             $items = array();
-                foreach($transaksi_sementara as $value) {
+            foreach($transaksi_sementara as $value) {
                 $items[] = [
                     'produk' => $value->produk,
                     'harga' => $value->harga,
@@ -61,13 +61,13 @@ class TransaksiController extends Controller
                     'barcode' => $value->barcode,
                 ];
             }
-            TransaksiDetail::insert([
-                'kasir' => Auth::user()->name,
-                'tanggal' => date("Y-m-d H:i:s"),
-                'transaksi' => $items,
-                'subharga' => floatval($total),
-                'nominal_pembayaran' => floatval($request->nominal_pembayaran),
-            ]);
+            $transaksi = new TransaksiDetail;
+            $transaksi->kasir = Auth::user()->id;
+            $transaksi->tanggal = date("Y-m-d H:i:s");
+            $transaksi->transaksi = $items;
+            $transaksi->subharga = floatval($total);
+            $transaksi->nominal_pembayaran = floatval($request->nominal_pembayaran);
+            $transaksi->save();
             TransaksiSementara::truncate();
             Alert::success('Pembayaran', 'Pembayaran Anda Berhasil !');
         }else{
